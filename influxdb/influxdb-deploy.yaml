@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: docker.io/library/influxdb:2.7.1
+          ports:
+            - containerPort: 8086
+          volumeMounts:
+            - name: influxdb-storage
+              mountPath: /var/lib/influxdb
+          env:
+            - name: INFLUXDB_HTTP_AUTH_ENABLED
+              value: "false"
+      volumes:
+        - name: influxdb-storage
+          persistentVolumeClaim:
+            claimName: influxdb-storage
