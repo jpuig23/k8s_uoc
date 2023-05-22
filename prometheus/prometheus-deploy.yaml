@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus
-  namespace: prometheus
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -16,7 +16,7 @@ spec:
       serviceAccountName: prometheus
       containers:
         - name: prometheus
-          image: docker image pull prom/prometheus:latest
+          image: docker.io/ubuntu/prometheus:latest
           ports:
             - containerPort: 9090
           volumeMounts:

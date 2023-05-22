@@ -13,14 +13,19 @@ spec:
         app: grafana
     spec:
       containers:
+      - name: grafana
+        image: docker.io/grafana/grafana-oss:latest
+        ports:
         - name: grafana
-          image: docker.io/grafana/grafana-oss:latest
-          ports:
-            - containerPort: 3000
-          volumeMounts:
-            - name: grafana-storage
-              mountPath: /var/lib/grafana
+          containerPort: 3000
+        volumeMounts:
+          - mountPath: /var/lib/grafana
+            name: grafana-storage
       volumes:
         - name: grafana-storage
           persistentVolumeClaim:
             claimName: grafana-storage
+        - name: grafana-config
+          configMap:
+              defaultMode: 420
+              name: grafana-config

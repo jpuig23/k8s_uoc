@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      containers:
+        - name: traefik
+          image: docker.io/library/traefik:latest
+          args:
+            - "--api.insecure=true"
+            - "--providers.kubernetescrd=true"
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 443
+          volumeMounts:
+            - name: traefik-storage
+              mountPath: "/etc/traefik"
+      volumes:
+        - name: traefik-storage
+          persistentVolumeClaim:
+            claimName: traefik-storage

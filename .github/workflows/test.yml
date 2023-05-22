@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Deploy InfluxDB to Minikube
 
 # Controls when the workflow will run
 on:
@@ -27,10 +27,11 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run:  echo $(hostname)
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Deploy InfluxDB
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+            kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-deploy.yaml
+            kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-pvc.yaml
+            kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-service.yaml

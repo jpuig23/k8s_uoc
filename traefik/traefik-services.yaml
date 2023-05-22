@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  selector:
+    app: traefik
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      nodePort: 30083
+    - name: https
+      port: 443
+      targetPort: https
+      nodePort: 30084
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.1.102
