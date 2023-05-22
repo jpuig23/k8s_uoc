@@ -29,6 +29,12 @@ jobs:
       - name: Run a one-line script
         run:  echo $(hostname)
 
+      - name: Start Minikube
+        run: minikube start --driver=docker
+
+      - name: Wait for Minikube cluster to be ready
+        run: minikube status
+
       # Runs a set of commands using the runners shell
       - name: Deploy InfluxDB
         run: |
