@@ -29,10 +29,10 @@ jobs:
       - name: Run a one-line script
         run:  echo $(hostname)
 
-      - name: Start Minikube
-        run: minikube start --driver=docker
+      - name: Check Minikube
+        run: kubectl config get-contexts
 
-      - name: Wait for Minikube cluster to be ready
+      - name: Check Minikube state
         run: minikube status
 
       # Runs a set of commands using the runners shell
