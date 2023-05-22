@@ -29,11 +29,6 @@ jobs:
       - name: Run a one-line script
         run:  echo $(hostname)
 
-      - name: Check Minikube
-        run: wget "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
-        run: sudo cp minikube-linux-amd64 /usr/local/bin/minikube
-        run: sudo chmod 755 /usr/local/bin/minikube
-
       - name: Check Minikube state
         run: minikube start --driver=docker
         run: minikube status
