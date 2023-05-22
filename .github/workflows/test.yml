@@ -30,10 +30,14 @@ jobs:
         run:  echo $(hostname)
 
       - name: Check Minikube
-        run: kubectl config get-contexts
+        run: wget "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
+        run: sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+        run: sudo chmod 755 /usr/local/bin/minikube
 
       - name: Check Minikube state
+        run: minikube start --driver=docker
         run: minikube status
+        run: docker version
 
       # Runs a set of commands using the runners shell
       - name: Deploy InfluxDB
