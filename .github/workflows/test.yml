@@ -40,6 +40,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Deploy InfluxDB
         run: |
-            kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-deploy.yaml
-            kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-pvc.yaml
-            kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-service.yaml
+            kubectl apply -f https://raw.githubusercontent.com/jpuig23/k8s_uoc/main/influxdb/influxdb-pvc.yaml
+            kubectl apply -f https://raw.githubusercontent.com/jpuig23/k8s_uoc/main/influxdb/influxdb-deploy.yaml
+            kubectl apply -f https://raw.githubusercontent.com/jpuig23/k8s_uoc/main/influxdb/influxdb-service.yaml
