@@ -43,3 +43,11 @@ jobs:
             kubectl apply -f https://raw.githubusercontent.com/jpuig23/k8s_uoc/main/influxdb/influxdb-pvc.yaml
             kubectl apply -f https://raw.githubusercontent.com/jpuig23/k8s_uoc/main/influxdb/influxdb-deploy.yaml
             kubectl apply -f https://raw.githubusercontent.com/jpuig23/k8s_uoc/main/influxdb/influxdb-service.yaml
+      # Runs to check the pods creation
+      - name: Check POD Created
+        run: kubectl get pods
+      # Runs to check connectiviy
+      - run:  curl -i http://localhost:8086/
+      
+      
+      
