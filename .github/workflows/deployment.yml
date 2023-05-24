@@ -10,3 +10,4 @@ jobs:
     - run: 
         echo "This job uses runner scale set runners!"
         echo $(hostname)
+        kubectl get pods -A
