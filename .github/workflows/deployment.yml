@@ -1,5 +1,10 @@
-name: InfludDB deployment
+name: InfludDB deployment Dev
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
   workflow_dispatch:
 
 jobs:
@@ -20,5 +25,8 @@ jobs:
         kubectl get pods -A
     - name: Check Infludb service state
       run :
-        minikube_ip= $(minikube ip)
-        echo "$minikube_ip"
+         kubectl get services
+    - name: Check Infludb curl state
+      run :
+           curl http://192.168.49.2:30080
+
