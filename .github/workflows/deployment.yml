@@ -9,5 +9,7 @@ jobs:
     steps:
     - run: 
         echo "This job uses runner scale set runners!"
-        echo $(hostname)
+    - run:
+        echo "$(hostname)"
+    - run:
         kubectl get pods -A
