@@ -20,5 +20,5 @@ jobs:
         kubectl get pods -A
     - name: Check Infludb service state
       run :
-        minikube_ip= $(minkube ip)
+        minikube_ip= $(minikube ip)
         echo "$minikube_ip"
