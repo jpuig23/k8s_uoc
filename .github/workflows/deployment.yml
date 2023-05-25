@@ -1,4 +1,4 @@
-name: Actions Runner Controller Demo
+name: InfludDB deployment
 on:
   workflow_dispatch:
 
@@ -7,9 +7,18 @@ jobs:
     # You need to use the INSTALLATION_NAME from the previous step
     runs-on: self-hosted
     steps:
-    - run: 
-        echo "This job uses runner scale set runners!"
-    - run:
-        echo "$(hostname)"
-    - run:
+    - name: Get current pods on the system
+      run :
         kubectl get pods -A
+    - name: Deploy InfluxDB
+      run: |
+          kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-pvc.yaml
+          kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-deploy.yaml
+          kubectl apply -f /home/master/k8s_uoc/influxdb/influxdb-service.yaml
+    - name: Check Influxdb pod state
+      run :
+        kubectl get pods -A
+    - name: Check Infludb service state
+      run :
+        minikube_ip= $(minkube ip)
+        echo "$minikube_ip"
